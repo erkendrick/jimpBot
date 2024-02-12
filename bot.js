@@ -10,7 +10,7 @@ const bot = new TelegramBot(token, { polling: true });
 const imageProcessingState = {};
 
 bot.onText(/\/start/, (msg) => {
-  bot.sendMessage(msg.chat.id, 'Bot is online! Send an image then use commands /cook, /dissolve, /toptext, /bottomtext to manipulate and add text to the image!');
+  bot.sendMessage(msg.chat.id, 'Bot is online! Send an image then use commands /cook, /dissolve, /toptext, /bottomtext to manipulate and add text to the image! Use /print to recieve your edited image');
 });
 
 bot.on('photo', async (msg) => {
