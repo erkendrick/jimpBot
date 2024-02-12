@@ -39,9 +39,8 @@ bot.onText(/\/cook/, async (msg) => {
   if (imageProcessingState[userId]) {
     try {
       const currentImagePath = imageProcessingState[userId].filePath;
-
       const image = await Jimp.read(currentImagePath);
-      console.log(image.bitmap.width, image.bitmap.height);
+      
       image.pixelate(2);
       image.quality(5);
       
@@ -53,7 +52,7 @@ bot.onText(/\/cook/, async (msg) => {
       bot.sendMessage(chatId, 'Error in cooking. Please try again.');
     }
   } else {
-    bot.sendMessage(chatId, 'No active session. Send a photo to get started.');
+    bot.sendMessage(chatId, 'No active session. Send an image to get started.');
   }
 });
 
@@ -75,7 +74,7 @@ bot.onText(/\/dissolve/, async (msg) => {
       bot.sendMessage(chatId, 'Error in dissolve. Please try again.');
     }
   } else {
-    bot.sendMessage(chatId, 'No active session. Send a photo to get started.');
+    bot.sendMessage(chatId, 'No active session. Send an image to get started.');
   }
 });
 
@@ -128,8 +127,7 @@ bot.onText(/\/bottomtext (.+)/, async (msg, match) => {
         lines.push(currentLine.trim());
       }
       const lineHeight = Jimp.measureTextHeight(font, currentLine);
-      
-      const y = image.bitmap.height * 0.85;
+      const y = image.bitmap.height - lineHeight;
       
       const reversedLines = lines.reverse();
       
@@ -204,18 +202,3 @@ bot.onText(/\/toptext (.+)/, async (msg, match) => {
     bot.sendMessage(chatId, 'No active session. Send an image to get started');
   }
 });
-
-/*
-    TODO 
-
-    Add more options
-    Make /start || /help display available options 
-    better garbage collection
-
-    Big issue to consider. Size of input image. We're using a static font type, 64 size bitmap font
-    if the image submitted is tiny, something like 200 x 100 pixels or something like that the bmpFont wont fit very well
-    Maybe just have a switch statement to handle fontsize inside toptext and bottomtext functions
-
-
-
-*/
