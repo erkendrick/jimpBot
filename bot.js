@@ -25,10 +25,10 @@ bot.on('photo', async (msg) => {
       filePath,
       modifications: [],
     };
-    await bot.sendMessage(chatId, 'Photo downloaded successfully.');
+    await bot.sendMessage(chatId, 'image downloaded successfully.');
   } catch (error) {
-    console.error("Error downloading photo", error);
-    bot.sendMessage(chatId, 'Error downloading photo. Please try again.');
+    console.error("Error downloading image", error);
+    bot.sendMessage(chatId, 'Error downloading image. Please try again.');
   }
 });
 
